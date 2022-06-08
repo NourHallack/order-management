@@ -20,7 +20,6 @@ public class Assignment2Application {
     /*
        2- Docker -> DockerHub
        6- Documentation (comments -  - how to ?)
-       7-Postman
     * */
 
 }
