@@ -1,0 +1,28 @@
+version: '3.9'
+
+services:
+  mysql:
+    image: mysql:8
+    container_name: mysql
+    environment:
+      - "MYSQL_DATABASE=test"
+      - "MYSQL_USER=root"
+      - "MYSQL_PASSWORD=1171088"
+      - "MYSQL_ROOT_PASSWORD=1171088"
+    ports:
+      - "127.0.0.1:3307:3306"
+    volumes:
+      - C:/NourHallack/WebServices2022/docker/data/mysql:/var/lib/mysql
+  app:
+    image: 'nourhallack/order-management:latest'
+    container_name: order-management
+    depends_on:
+      - mysql
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/test?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=1171088
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      - SERVER_PORT=8080
+    ports:
+      - "127.0.0.1:8081:8080"
